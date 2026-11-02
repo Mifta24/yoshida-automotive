@@ -77,6 +77,17 @@ class WorkshopSiteTest extends TestCase
         $this->get('/yoshida')->assertSee(route('workshop.access', ['workshopSlug' => 'yoshida', 'lang' => 'ja']), false);
     }
 
+    public function test_the_division_company_and_access_pages_follow_the_page_language(): void
+    {
+        $this->get('/yoshida/divisions/body-paint?lang=en')->assertOk()->assertSee('Body & Paint')->assertSee('Repair process')->assertDontSee('板金・塗装')->assertDontSee('修理の流れ');
+        $this->get('/yoshida/divisions/tires?lang=id')->assertOk()->assertSee('Penjualan & Ganti Ban')->assertSee('Layanan kami')->assertDontSee('対応サービス');
+        $this->get('/yoshida/divisions/insurance?lang=en')->assertOk()->assertSee('Main coverage')->assertDontSee('主な補償内容');
+        $this->get('/yoshida/company?lang=en')->assertOk()->assertSee('Message from the president')->assertSee('President & CEO')->assertDontSee('代表者挨拶');
+        $this->get('/yoshida/company?lang=id')->assertOk()->assertSee('Sambutan presiden direktur')->assertDontSee('私たちの想い');
+        $this->get('/yoshida/access?lang=id')->assertOk()->assertSee('Informasi toko')->assertSee('Segera hadir')->assertDontSee('店舗情報');
+        $this->get('/yoshida/access?lang=ja')->assertOk()->assertSee('店舗情報');
+    }
+
     public function test_the_home_page_offers_the_theme_switch(): void
     {
         $this->get('/yoshida')->assertSee('data-theme-toggle', false)->assertSee('yoshida-theme', false);

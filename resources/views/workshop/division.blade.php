@@ -5,15 +5,15 @@
     $isTires = $divisionKey === 'tires';
 @endphp
 <x-workshop-stage :site="$site" :prefill="$prefill" :workshop="$workshop" :locale="$locale" :supported-locales="$supportedLocales" :labels="$labels" :garage="$garage" :narration="$narration" :scene="$scene" :backdrop="$backdrop" :menu-items="$menuItems" :wizard="$wizard" :service-terms="$serviceTerms" :today="$today" :tour-stops="$tourStops" :menu="false" :title="$division['title'].' · '.$workshop->name">
-    <article class="y-panel y-panel-{{ $divisionKey }}" lang="ja">
+    <article class="y-panel y-panel-{{ $divisionKey }}" lang="{{ $locale }}">
         @if ($isTires)
             <header class="y-tires-bar">
                 <x-site-logo class="y-bar-logo" />
                 <p><strong>{{ $workshop->translations['ja']['name'] ?? $workshop->name }}</strong><small>YOSHIDA AUTOMOTIVE</small></p>
                 <span class="y-bar-sep" aria-hidden="true">/</span>
-                <span class="y-bar-title">タイヤサービス</span>
+                <span class="y-bar-title">{{ $t('タイヤサービス') }}</span>
                 <em>– X-Change –</em>
-                <a class="y-bar-phone" href="tel:{{ $division['external']['phone'] }}"><x-site-icon name="phone" /> 直通番号 <strong>{{ $division['external']['phone'] }}</strong></a>
+                <a class="y-bar-phone" href="tel:{{ $division['external']['phone'] }}"><x-site-icon name="phone" /> {{ $t('直通番号') }} <strong>{{ $division['external']['phone'] }}</strong></a>
                 <a href="{{ $home }}" data-stage-exit class="y-panel-close" aria-label="{{ $site['close'] }}"><span aria-hidden="true">×</span></a>
             </header>
         @else
@@ -22,7 +22,7 @@
 
         <div class="y-panel-side" @if ($photo) style="--y-photo: url('{{ $photo }}')" @endif>
             @if ($isTires)
-                <div class="y-xchange"><span class="y-xlogo">TIRE SHOP<b>X-Change</b></span><em>X-Change</em><small>エクスチェンジ</small></div>
+                <div class="y-xchange"><span class="y-xlogo">TIRE SHOP<b>X-Change</b></span><em>X-Change</em><small>{{ $t('エクスチェンジ') }}</small></div>
                 @php $shopSide = $sitePhoto('tires-shop'); @endphp
                 <span class="y-shop-photo y-shop-side" @if ($shopSide) style="background-image: url('{{ $shopSide }}')" @endif></span>
             @else

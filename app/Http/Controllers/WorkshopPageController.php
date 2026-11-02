@@ -155,7 +155,7 @@ class WorkshopPageController extends Controller
     {
         [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
 
-        $details = WorkshopDivisions::find($division);
+        $details = WorkshopDivisions::find($division, $locale);
         abort_if($details === null, 404);
 
         $data = $this->withSiteBackdrop($this->stageData($workshop, $locale, 'services'));
@@ -177,7 +177,7 @@ class WorkshopPageController extends Controller
 
         return view('workshop.company', [
             ...$this->withSiteBackdrop($this->stageData($workshop, $locale, 'info')),
-            'company' => WorkshopDivisions::company(),
+            'company' => WorkshopDivisions::company($locale),
             'photo' => $this->sitePhoto('president'),
         ]);
     }
@@ -364,6 +364,7 @@ class WorkshopPageController extends Controller
             'labels' => $labels,
             'garage' => $garage,
             'site' => WorkshopDivisions::siteLabels($locale),
+            't' => fn (string $text): string => WorkshopDivisions::translate($text, $locale),
             'serviceTerms' => self::SERVICE_TERMS[$locale],
             'wizard' => $this->wizardLabels($locale),
             'tourStops' => $this->tourStops($workshop, $serviceTypes, $locale),

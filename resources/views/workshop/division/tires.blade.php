@@ -18,14 +18,14 @@
 </div>
 
 <p class="y-banner">
-    <span class="y-banner-logo">X-Change<small>エクスチェンジ</small></span>
+    <span class="y-banner-logo">X-Change<small>{{ $t('エクスチェンジ') }}</small></span>
     <span class="y-banner-note">{{ $br($division['external']['note']) }}</span>
     <a href="{{ $division['external']['url'] }}" target="_blank" rel="noopener">{{ $division['external']['label'] }} <span aria-hidden="true">↗</span><small>{{ $division['external']['url'] }}</small></a>
 </p>
 
 <div class="y-duo y-duo-shop">
     <section class="y-box">
-        <h2 class="y-heading y-heading-icon"><x-site-icon name="warehouse" />X-CHANGE 店舗イメージ</h2>
+        <h2 class="y-heading y-heading-icon"><x-site-icon name="warehouse" />{{ $t('X-CHANGE 店舗イメージ') }}</h2>
         @php $shop = $sitePhoto('tires-shop'); @endphp
         <span class="y-shop-photo" @if ($shop) style="background-image: url('{{ $shop }}')" @endif></span>
     </section>

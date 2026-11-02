@@ -84,11 +84,40 @@ class WorkshopDivisions
     }
 
     /**
+     * The English or Indonesian wording of a Japanese string; the Japanese itself when none is stored.
+     */
+    public static function translate(string $text, string $locale): string
+    {
+        $table = match ($locale) {
+            'en' => SiteTranslations::EN,
+            'id' => SiteTranslations::ID,
+            default => [],
+        };
+
+        return $table[$text] ?? $text;
+    }
+
+    /**
      * @return array<string, mixed>|null
      */
-    public static function find(string $key): ?array
+    public static function find(string $key, string $locale = 'ja'): ?array
     {
-        return self::DIVISIONS[$key] ?? null;
+        $division = self::DIVISIONS[$key] ?? null;
+
+        return $division === null ? null : self::translateAll($division, $locale);
+    }
+
+    /**
+     * Every string in the structure, in the page language.
+     */
+    private static function translateAll(mixed $value, string $locale): mixed
+    {
+        return match (true) {
+            $locale === 'ja' => $value,
+            is_string($value) => self::translate($value, $locale),
+            is_array($value) => array_map(fn (mixed $item) => self::translateAll($item, $locale), $value),
+            default => $value,
+        };
     }
 
     /**
@@ -195,9 +224,9 @@ class WorkshopDivisions
      *
      * @return array{name: string, name_en: string, role: string, company: string, heading_1: string, heading_accent: string, heading_2: string, paragraphs: list<string>, values: list<string>, phone: string, hours: string}
      */
-    public static function company(): array
+    public static function company(string $locale = 'ja'): array
     {
-        return [
+        return self::translateAll([
             'name' => '吉田 直樹', 'name_en' => 'Naoki Yoshida', 'role' => '代表取締役社長', 'company' => '吉田自動車工業株式会社',
             'heading_1' => 'クルマの価値を守り、', 'heading_accent' => '長く愛される一台', 'heading_2' => 'をこれからも。',
             'paragraphs' => [
@@ -208,6 +237,6 @@ class WorkshopDivisions
             ],
             'values' => ['安心・安全の追求', '確かな板金技術', '長く乗れるクルマの価値創造'],
             'phone' => '042-556-1219', 'hours' => '9:00-18:00／日祝休',
-        ];
+        ], $locale);
     }
 }

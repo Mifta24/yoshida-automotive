@@ -1326,3 +1326,4 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 :root[data-theme="dark"] .y-wizard-wrap .sp-day.is-start, :root[data-theme="dark"] .y-wizard-wrap .sp-day.is-end { color: #0b2545; }
 :root[data-theme="dark"] .y-wizard-wrap .sp-hint { background: #16335f; color: #f6cf63; }
 .wizard-calendar + .wizard-hint { display: none; }
+.y-tabs { flex: none; }
