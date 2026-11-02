@@ -209,12 +209,13 @@ class WorkshopPageController extends Controller
 
     /**
      * A site photo once it has been added to public/images/yoshida, else null so the page shows its placeholder.
+     * The file's modified time is appended so a replaced photo is never served from a stale browser cache.
      */
     private function sitePhoto(string $name): ?string
     {
         $path = "images/yoshida/{$name}.webp";
 
-        return file_exists(public_path($path)) ? asset($path) : null;
+        return file_exists(public_path($path)) ? asset($path).'?v='.filemtime(public_path($path)) : null;
     }
 
     public function services(Request $request, string $workshopSlug): View
