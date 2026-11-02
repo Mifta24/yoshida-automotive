@@ -1257,6 +1257,21 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .chat-bar button[type="submit"] { min-height: 40px; padding: 0 16px; background: linear-gradient(180deg, #fbdc7d, #e8b42f); color: #0b2545; font-weight: 800; }
 .stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .chat-bar .chat-mic { width: 40px; min-height: 40px; border-color: var(--y-line); background: #fff; }
 
+/* On the service panels the conversation opens over the left card instead of
+   on top of the tabs, so the page stays readable while the customer chats.
+   Tires keeps its four badges visible beneath the chat. */
+@media (min-width: 1101px) {
+    .stage.stage.stage:has(.y-panel) {
+        --y-chat-left: 37px;
+        --y-chat-width: max(300px, calc((100vw - 74px) * .41));
+        --y-chat-top: calc(var(--header) + 29px);
+        --y-chat-bottom: 119px;
+    }
+    .stage.stage.stage:has(.y-panel-tires) { --y-chat-top: calc(var(--header) + 88px); --y-chat-bottom: 235px; }
+    .stage.stage.stage:has(.y-panel) .chat-log { left: var(--y-chat-left); right: auto; top: var(--y-chat-top); bottom: var(--y-chat-bottom); width: var(--y-chat-width); border-radius: 16px; }
+    .stage.stage.stage:has(.y-panel) .chat-bar { left: calc(var(--y-chat-left) + 16px); right: auto; bottom: calc(var(--y-chat-bottom) + 16px); width: calc(var(--y-chat-width) - 32px); }
+}
+
 /* calendar and form controls: navy header, gold selection */
 .sp { gap: 12px; padding: 0 16px 16px; overflow: hidden; border: 1px solid #d9a52188; border-radius: 16px; background: #fff; color: #0b2545; }
 .sp-head { margin: 0 -16px 2px; padding: 12px 14px; background: linear-gradient(90deg, #0c2a52, #123868); box-shadow: inset 0 -2px 0 #e8b42f; }
