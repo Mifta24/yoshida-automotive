@@ -1,8 +1,4 @@
-<section class="garage-content stage-panel-right @container" aria-label="{{ $wizard['title'] }}">
-    <a href="{{ route('workshop.show', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit data-tour-line="{{ $narration['tour_garage'] }}" class="panel-close" aria-label="{{ $garage['back'] }}"><span aria-hidden="true">×</span></a>
-    <p class="garage-eyebrow">{{ $workshop->name }}</p>
-    <h2>{{ $wizard['title'] }}</h2>
-
+<div class="y-wizard-wrap" aria-label="{{ $wizard['title'] }}">
     <div class="wizard" data-wizard
         data-quote-url="{{ route('reservation.quote', $workshop->slug) }}"
         data-submit-url="{{ route('reservation.store', $workshop->slug) }}"
@@ -14,9 +10,7 @@
         data-preselect-service="{{ $preselectedService ?? '' }}"
     >
         <div data-wizard-flow>
-            <p class="mt-3 max-w-xl text-sm leading-relaxed text-stone-600">{{ $wizard['intro'] }}</p>
-
-            <div class="wizard-progress" aria-label="{{ $wizard['title'] }}">
+                        <div class="wizard-progress" aria-label="{{ $wizard['title'] }}">
                 <p class="wizard-step-label" data-wizard-step-label aria-live="polite"></p>
                 <ol>
                     @foreach ($wizard['steps'] as $stepLabel)
@@ -26,15 +20,10 @@
             </div>
 
             <form data-wizard-form novalidate autocomplete="on">
-                <div data-step="1" class="wizard-step">
-                    <label class="wizard-field">
-                        <span>{{ $wizard['drop_off_date'] }}</span>
-                        <input type="date" name="drop_off_date" min="{{ $today }}" required>
-                    </label>
-                    <label class="wizard-field">
-                        <span>{{ $wizard['pickup_date'] }}</span>
-                        <input type="date" name="pickup_date" min="{{ $today }}">
-                    </label>
+                <div data-step="1" class="wizard-step wizard-step-wide">
+                    <input type="hidden" name="drop_off_date">
+                    <input type="hidden" name="pickup_date">
+                    <div class="wizard-calendar" data-calendar-host></div>
                     <p class="wizard-hint" data-days-hint aria-live="polite"></p>
                 </div>
 
@@ -142,4 +131,4 @@
 
         <script type="application/json" data-wizard-labels>@json($wizard)</script>
     </div>
-</section>
+</div>

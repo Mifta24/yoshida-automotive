@@ -5,3 +5,4 @@ import './stage';
 import './narrator';
 import './parallax';
 import './site';
+import './wizard-calendar';

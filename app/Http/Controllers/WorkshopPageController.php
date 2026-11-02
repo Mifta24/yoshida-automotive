@@ -288,7 +288,8 @@ class WorkshopPageController extends Controller
         [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
 
         return view('workshop.reservation-index', [
-            ...$this->stageData($workshop, $locale, 'reservation'),
+            ...$this->withSiteBackdrop($this->stageData($workshop, $locale, 'reservation')),
+            'photo' => $this->sitePhoto('reservation') ?? $this->sitePhoto('hero'),
             'preselectedService' => (string) $request->query('service', ''),
         ]);
     }
