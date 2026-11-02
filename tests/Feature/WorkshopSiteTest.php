@@ -46,6 +46,37 @@ class WorkshopSiteTest extends TestCase
         $this->get('/yoshida/company')->assertOk()->assertSee('吉田 直樹')->assertSee('代表者挨拶');
     }
 
+    public function test_the_access_page_shows_contact_details_and_waits_for_an_address(): void
+    {
+        Workshop::where('slug', 'yoshida')->update(['phone' => '042-556-1219', 'opening_time' => '09:00', 'closing_time' => '18:00']);
+
+        $this->get('/yoshida/access')
+            ->assertOk()
+            ->assertSee('アクセス')
+            ->assertSee('042-556-1219')
+            ->assertSee('9:00〜18:00')
+            ->assertSee('04-2937-5296')
+            ->assertSee('準備中')
+            ->assertSee('地図は住所の登録後に表示されます。')
+            ->assertDontSee('google.com/maps');
+    }
+
+    public function test_the_access_page_links_to_maps_once_the_workshop_has_an_address(): void
+    {
+        Workshop::where('slug', 'yoshida')->update(['address' => '東京都八王子市1-2-3']);
+
+        $this->get('/yoshida/access')
+            ->assertOk()
+            ->assertSee('東京都八王子市1-2-3')
+            ->assertSee(e('https://www.google.com/maps/search/?api=1&query='.rawurlencode('東京都八王子市1-2-3')), false)
+            ->assertDontSee('準備中');
+    }
+
+    public function test_the_header_access_link_opens_the_access_page(): void
+    {
+        $this->get('/yoshida')->assertSee(route('workshop.access', ['workshopSlug' => 'yoshida', 'lang' => 'ja']), false);
+    }
+
     public function test_the_home_page_offers_the_theme_switch(): void
     {
         $this->get('/yoshida')->assertSee('data-theme-toggle', false)->assertSee('yoshida-theme', false);

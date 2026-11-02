@@ -40,7 +40,7 @@
                 </details>
                 <a href="{{ route('workshop.division', ['workshopSlug' => $workshop->slug, 'division' => 'body-paint', 'tab' => 1, 'lang' => $locale]) }}" data-stage-exit>{{ $site['nav_cases'] }}</a>
                 <a href="{{ route('workshop.company', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit @if($scene === 'info' && request()->routeIs('workshop.company')) aria-current="page" @endif>{{ $site['nav_company'] }}</a>
-                <a href="{{ route('workshop.info', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit>{{ $site['nav_access'] }}</a>
+                <a href="{{ route('workshop.access', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit @if(request()->routeIs('workshop.access')) aria-current="page" @endif>{{ $site['nav_access'] }}</a>
             </nav>
             <div class="stage-tools">
                 <button type="button" class="y-theme" data-theme-toggle data-label-light="{{ $site['theme_light'] }}" data-label-dark="{{ $site['theme_dark'] }}"><x-site-icon name="moon" class="y-theme-moon" /><x-site-icon name="sun" class="y-theme-sun" /></button>

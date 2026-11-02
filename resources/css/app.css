@@ -1199,3 +1199,16 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .y-panel-tires .y-heading-bar { margin: 6px 0 5px; padding: 4px 12px; }
 .y-panel-tires .y-shop-photo { aspect-ratio: auto; min-height: 56px; }
 .y-panel-tires .y-box { min-height: 0; }
+
+/* access */
+.y-info { display: grid; border: 1px solid var(--y-line); border-radius: 12px; background: var(--y-tile); }
+.y-info div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px; padding: 14px 18px; border-top: 1px solid var(--y-line); font-size: 15px; }
+.y-info div:first-child { border-top: 0; }
+.y-info dt { color: var(--y-text-soft); font-weight: 800; }
+.y-info a { color: inherit; text-decoration: underline; text-decoration-color: #e8b42f; text-underline-offset: 3px; }
+.y-muted { color: var(--y-text-soft); }
+.y-map { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 180px; padding: 20px; border: 1px dashed var(--y-line); border-radius: 12px; background: color-mix(in srgb, var(--y-tile) 70%, transparent); color: var(--y-text-soft); text-align: center; }
+.y-map svg { width: 40px; height: 40px; color: #d9a521; }
+.y-map-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.y-map-actions a { padding: 9px 18px; border-radius: 999px; background: #0b2545; color: #fff; font-size: 13px; font-weight: 800; box-shadow: inset 0 0 0 1px #d9a52199; }
+.y-panel-access .y-panel-main > .y-map { flex: 1; }

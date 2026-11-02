@@ -117,6 +117,7 @@ Route::prefix('{workshopSlug}')->where(['workshopSlug' => '(?!(?:up|admin|platfo
     Route::get('reservation', [WorkshopPageController::class, 'reservationScene'])->name('workshop.reservation');
     Route::get('divisions/{division}', [WorkshopPageController::class, 'division'])->name('workshop.division');
     Route::get('company', [WorkshopPageController::class, 'company'])->name('workshop.company');
+    Route::get('access', [WorkshopPageController::class, 'access'])->name('workshop.access');
 
     Route::get('booking', [CustomerBookingController::class, 'page'])->name('workshop.booking');
     Route::prefix('booking')->name('booking.')->middleware('throttle:booking-manage')->group(function () {

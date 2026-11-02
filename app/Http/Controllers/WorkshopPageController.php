@@ -183,6 +183,17 @@ class WorkshopPageController extends Controller
         ]);
     }
 
+    public function access(Request $request, string $workshopSlug): View
+    {
+        [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
+
+        return view('workshop.access', [
+            ...$this->withSiteBackdrop($this->stageData($workshop, $locale, 'info')),
+            'photo' => $this->sitePhoto('access') ?? $this->sitePhoto('hero'),
+            'tiresPhone' => WorkshopDivisions::find('tires')['external']['phone'],
+        ]);
+    }
+
     /**
      * The hero photo behind every page of the site, once it has been added.
      *

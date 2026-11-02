@@ -76,6 +76,12 @@
         @case('gear')
             <circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>
             @break
+        @case('pin')
+            <path d="M12 21s-6.5-5.4-6.5-11a6.5 6.5 0 0 1 13 0c0 5.6-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.5"/>
+            @break
+        @case('clock')
+            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+            @break
         @case('crown')
             <path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8Z"/>
             @break
