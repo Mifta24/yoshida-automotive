@@ -142,9 +142,11 @@ class WorkshopPageController extends Controller
     public function show(Request $request, string $workshopSlug): View
     {
         [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
+        $data = $this->stageData($workshop, $locale, 'garage');
+        $data['backdrop']['image'] = $this->sitePhoto('hero') ?? $data['backdrop']['image'];
 
         return view('workshop.show', [
-            ...$this->stageData($workshop, $locale, 'garage'),
+            ...$data,
             'divisionCards' => WorkshopDivisions::cards($locale),
             'divisionImages' => collect(WorkshopDivisions::cards($locale))->mapWithKeys(fn (array $card) => [$card['key'] => $this->sitePhoto($card['key'])])->all(),
         ]);
