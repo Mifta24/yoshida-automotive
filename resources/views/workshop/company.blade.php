@@ -1,5 +1,6 @@
 <x-workshop-stage :site="$site" :prefill="$prefill" :workshop="$workshop" :locale="$locale" :supported-locales="$supportedLocales" :labels="$labels" :garage="$garage" :narration="$narration" :scene="$scene" :backdrop="$backdrop" :menu-items="$menuItems" :wizard="$wizard" :service-terms="$serviceTerms" :today="$today" :tour-stops="$tourStops" :menu="false" :title="$t('会社案内').' · '.$workshop->name">
     <article class="y-company" lang="{{ $locale }}">
+        <img class="y-company-backdrop" src="{{ asset('images/yoshida/body-paint.webp') }}" alt="" aria-hidden="true" fetchpriority="high">
         <nav class="y-crumbs" aria-label="{{ $t('パンくず') }}"><a href="{{ route('workshop.show', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit>{{ $t('ホーム') }}</a> › {{ $t('会社案内') }} › {{ $t('代表者挨拶') }}</nav>
         <header class="y-company-title"><h1>{{ $t('会社案内') }}</h1><span aria-hidden="true">/</span><p>{{ $t('代表者挨拶') }}</p></header>
         <div class="y-company-grid">

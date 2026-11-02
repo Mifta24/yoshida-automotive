@@ -18,6 +18,9 @@ function initThemeToggle() {
             document.documentElement.dataset.theme = next;
             try {
                 localStorage.setItem(THEME_KEY, next);
+                if (document.querySelector('.y-company')) {
+                    sessionStorage.setItem('yoshida-company-theme', 'selected');
+                }
             } catch { /* the choice just lasts for this page */ }
             paint();
         });

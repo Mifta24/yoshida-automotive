@@ -913,8 +913,10 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .stage:has(.y-home) .stage-shade { background: var(--y-shade); }
 .stage:has(.y-home) .stage-image { filter: brightness(1.04) saturate(1.04); }
 :root[data-theme="dark"] .stage:has(.y-home) .stage-image { filter: brightness(.68) saturate(.9); }
-.stage:has(.y-panel) .stage-image, .stage:has(.y-company) .stage-image { filter: blur(7px) saturate(.85); }
-.stage:has(.y-panel) .stage-shade, .stage:has(.y-company) .stage-shade { background: var(--y-veil); }
+.stage:has(.y-panel) .stage-image { filter: blur(7px) saturate(.85); }
+.stage:has(.y-panel) .stage-shade { background: var(--y-veil); }
+.stage:has(.y-company) .stage-image { filter: brightness(1.04) saturate(.95); }
+.stage:has(.y-company) .stage-shade { background: transparent; }
 
 /* home */
 .y-home { position: absolute; inset: var(--header) 0 0; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; overflow-y: auto; padding: 30px 28px 24px 56px; color: var(--y-hero-text); }
@@ -1116,8 +1118,10 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .y-banner a small { flex-basis: 100%; color: #f6cf63; font-size: 10.5px; }
 
 /* company */
-.y-company { position: absolute; inset: var(--header) 0 0; z-index: 1; overflow-x: hidden; overflow-y: auto; background: var(--y-veil); color: var(--y-text); }
-:root[data-theme="dark"] .y-company { background: radial-gradient(60% 50% at 78% 18%, #1b3f73aa, transparent), var(--y-veil); }
+.y-company { position: absolute; inset: var(--header) 0 0; z-index: 1; isolation: isolate; overflow-x: hidden; overflow-y: auto; background: transparent; color: var(--y-text); }
+.y-company-backdrop { position: absolute; inset: 0 0 0 auto; z-index: -2; width: 56%; height: 100%; object-fit: cover; object-position: center; }
+.y-company::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #ffffff00 0%, #ffffff00 24%, #fffffff2 37%, #ffffffe8 67%, #ffffffa8 83%, #ffffff38 100%); pointer-events: none; }
+:root[data-theme="dark"] .y-company::before { background: linear-gradient(90deg, #040d1b00 0%, #040d1b00 24%, #040d1bf2 37%, #040d1be8 67%, #040d1ba8 83%, #040d1b38 100%); }
 .y-crumbs { padding: 12px 40px; border-bottom: 1px solid var(--y-line); background: color-mix(in srgb, var(--y-tile) 60%, transparent); color: var(--y-text-soft); font-size: 13px; }
 .y-company-title { display: inline-flex; align-items: center; gap: 16px; margin-top: 0; padding: 12px 56px 12px 40px; background: var(--y-tile); clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%); }
 .y-company-title h1 { font-size: 34px; font-weight: 800; }

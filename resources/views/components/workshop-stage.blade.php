@@ -10,7 +10,7 @@
     <meta property="og:title" content="{{ $workshop->name }}">
     @if ($workshop->coverUrl())<meta property="og:image" content="{{ $workshop->coverUrl() }}">@endif
     @if (filled($workshop->description))<meta property="og:description" content="{{ \Illuminate\Support\Str::limit($workshop->description, 200) }}">@endif
-    <script>try { document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') || localStorage.getItem('yoshida-theme') || 'light'; } catch { document.documentElement.dataset.theme = 'light'; }</script>
+    <script>try { const requestedTheme = new URLSearchParams(location.search).get('theme'); const companyThemeWasSelected = sessionStorage.getItem('yoshida-company-theme') === 'selected'; document.documentElement.dataset.theme = requestedTheme || (@json(request()->routeIs('workshop.company')) && !companyThemeWasSelected ? 'light' : localStorage.getItem('yoshida-theme')) || 'light'; } catch { document.documentElement.dataset.theme = 'light'; }</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
