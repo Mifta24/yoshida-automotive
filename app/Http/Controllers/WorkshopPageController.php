@@ -159,13 +159,15 @@ class WorkshopPageController extends Controller
         $details = WorkshopDivisions::find($division);
         abort_if($details === null, 404);
 
-        $data = $this->stageData($workshop, $locale, 'services');
+        $data = $this->withSiteBackdrop($this->stageData($workshop, $locale, 'services'));
 
         return view('workshop.division', [
             ...$data,
             'division' => $details,
+            'divisionKey' => $division,
             'divisionServices' => $data['serviceTypes']->whereIn('slug', $details['services'])->values(),
             'photo' => $this->sitePhoto($division),
+            'sitePhoto' => fn (string $name): ?string => $this->sitePhoto($name),
             'openTab' => min(max((int) $request->query('tab', 0), 0), 4),
         ]);
     }
@@ -175,10 +177,23 @@ class WorkshopPageController extends Controller
         [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
 
         return view('workshop.company', [
-            ...$this->stageData($workshop, $locale, 'info'),
+            ...$this->withSiteBackdrop($this->stageData($workshop, $locale, 'info')),
             'company' => WorkshopDivisions::company(),
             'photo' => $this->sitePhoto('president'),
         ]);
+    }
+
+    /**
+     * The hero photo behind every page of the site, once it has been added.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    private function withSiteBackdrop(array $data): array
+    {
+        $data['backdrop']['image'] = $this->sitePhoto('hero') ?? $data['backdrop']['image'];
+
+        return $data;
     }
 
     /**

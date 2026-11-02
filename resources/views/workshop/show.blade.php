@@ -11,8 +11,8 @@
             </div>
 
             <aside class="y-ai-panel" aria-label="{{ $site['panel_title'] }}">
-                <header><strong>{{ $site['panel_title'] }}</strong><span><i></i>{{ $site['panel_online'] }}</span></header>
-                <p class="y-ai-bubble">{{ $site['panel_greeting'] }}</p>
+                <header><x-site-icon name="robot" class="y-ai-head-icon" /><strong>{{ $site['panel_title'] }}</strong><span><i></i>{{ $site['panel_online'] }}</span></header>
+                <div class="y-ai-msg"><span class="y-ai-bot"><x-site-icon name="robot" /></span><p class="y-ai-bubble">{{ $site['panel_greeting'] }}</p></div>
                 @foreach (['quick_repair' => 'tools', 'quick_inspection' => 'calendar', 'quick_tire' => 'tire'] as $key => $icon)
                     <button type="button" class="y-ai-quick" data-hero-quick-message="{{ $site[$key] }}"><x-site-icon :name="$icon" /> {{ $site[$key] }} <span aria-hidden="true">›</span></button>
                 @endforeach
@@ -28,7 +28,7 @@
                 <a class="y-card" href="{{ route('workshop.division', ['workshopSlug' => $workshop->slug, 'division' => $card['key'], 'lang' => $locale]) }}" data-stage-exit @if ($divisionImages[$card['key']]) style="--y-photo: url('{{ $divisionImages[$card['key']] }}')" @endif>
                     <x-site-icon :name="$card['icon']" class="y-card-icon" />
                     <strong>{{ $card['title'] }}</strong>
-                    <span>{{ $card['text'] }}</span>
+                    <span>{!! nl2br(e($card['text'])) !!}</span>
                     <i aria-hidden="true">›</i>
                 </a>
             @endforeach

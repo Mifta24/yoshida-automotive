@@ -10,7 +10,7 @@
     <meta property="og:title" content="{{ $workshop->name }}">
     @if ($workshop->coverUrl())<meta property="og:image" content="{{ $workshop->coverUrl() }}">@endif
     @if (filled($workshop->description))<meta property="og:description" content="{{ \Illuminate\Support\Str::limit($workshop->description, 200) }}">@endif
-    <script>try { document.documentElement.dataset.theme = localStorage.getItem('yoshida-theme') || 'light'; } catch { document.documentElement.dataset.theme = 'light'; }</script>
+    <script>try { document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') || localStorage.getItem('yoshida-theme') || 'light'; } catch { document.documentElement.dataset.theme = 'light'; }</script>
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -26,7 +26,7 @@
 
         <header class="stage-header y-header">
             <a href="{{ route('workshop.show', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" @if($scene !== 'garage') data-stage-exit @endif class="y-logo">
-                <span class="workshop-monogram" aria-hidden="true">@if ($workshop->logoUrl())<img src="{{ $workshop->logoUrl() }}" alt="">@else<x-site-icon name="car" />@endif</span>
+                @if ($workshop->logoUrl())<img src="{{ $workshop->logoUrl() }}" alt="" class="y-logo-img">@else<x-site-logo class="y-logo-mark" />@endif
                 <span class="min-w-0"><strong>{{ \Illuminate\Support\Str::upper($workshop->name) }}</strong>@if (filled($workshop->translations['ja']['name'] ?? null))<small lang="ja">{{ $workshop->translations['ja']['name'] }}</small>@endif</span>
             </a>
             <nav class="y-nav" aria-label="{{ $site['nav_services'] }}">
@@ -39,7 +39,7 @@
                     </ul>
                 </details>
                 <a href="{{ route('workshop.division', ['workshopSlug' => $workshop->slug, 'division' => 'body-paint', 'tab' => 1, 'lang' => $locale]) }}" data-stage-exit>{{ $site['nav_cases'] }}</a>
-                <a href="{{ route('workshop.company', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit>{{ $site['nav_company'] }}</a>
+                <a href="{{ route('workshop.company', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit @if($scene === 'info' && request()->routeIs('workshop.company')) aria-current="page" @endif>{{ $site['nav_company'] }}</a>
                 <a href="{{ route('workshop.info', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" data-stage-exit>{{ $site['nav_access'] }}</a>
             </nav>
             <div class="stage-tools">
@@ -50,7 +50,7 @@
                         <a href="?lang={{ $code }}" lang="{{ $code }}" aria-label="{{ ['id' => 'Bahasa Indonesia', 'en' => 'English', 'ja' => '日本語'][$code] }}" @if($code === $locale) aria-current="true" @endif>{{ $code }}</a>
                     @endforeach
                 </nav>
-                <a class="y-header-cta" href="{{ route('workshop.reservation', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" @if($scene !== 'reservation') data-stage-exit @endif><x-site-icon name="chat" /> {{ $site['nav_ai'] }}</a>
+                <a class="y-header-cta" href="{{ route('workshop.reservation', ['workshopSlug' => $workshop->slug, 'lang' => $locale]) }}" @if($scene !== 'reservation') data-stage-exit @endif><x-site-icon name="robot" /> {{ $site['nav_ai'] }}</a>
             </div>
         </header>
 

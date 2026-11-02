@@ -24,5 +24,6 @@
                 <p class="y-sign"><span>{{ $company['company'] }}<br>{{ $company['role'] }}</span><strong>{{ $company['name'] }}</strong></p>
             </aside>
         </div>
+        <svg class="y-swoosh" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120C160 110 340 70 600 8" fill="none" stroke="currentColor" stroke-width="3"/></svg>
     </article>
 </x-workshop-stage>
