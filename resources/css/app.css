@@ -1124,7 +1124,9 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .y-company-title span { color: #e8b42f; font-size: 38px; transform: skewX(-18deg); }
 .y-company-title p { font-size: 21px; font-weight: 700; }
 .y-company-grid { display: grid; grid-template-columns: minmax(280px, 27%) minmax(0, 1fr) minmax(300px, 29%); gap: 34px; align-items: start; }
-.y-president { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-self: stretch; min-height: calc(100dvh - var(--header) - 128px); padding: 26px 24px 30px 40px; background: linear-gradient(0deg, #071a33f0 20%, #0b254500 58%), var(--y-photo, linear-gradient(160deg, #3a6aa6, #0b2545)); background-size: cover; background-position: top center; color: #fff; }
+.y-president { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-self: stretch; min-height: calc(100dvh - var(--header) - 128px); padding: 26px 24px 30px 40px; color: #fff; }
+.y-president::before { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #071a33b3 0%, #071a3300 26%), var(--y-photo, linear-gradient(160deg, #3a6aa6, #0b2545)); background-size: cover; background-position: 0 0, center 33%; -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent 100%); mask-image: linear-gradient(90deg, #000 86%, transparent 100%); }
+.y-president > * { position: relative; }
 .y-president-role { padding-left: 9px; border-left: 4px solid #e8b42f; font-size: 14px; }
 .y-president-name { margin-top: 6px; font: 700 36px/1.2 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif; }
 .y-president-en { font-size: 12px; letter-spacing: .14em; }
