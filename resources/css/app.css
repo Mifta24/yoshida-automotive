@@ -218,7 +218,7 @@
 .opening-links a { display: flex; align-items: center; justify-content: space-between; min-height: 52px; border-top: 1px solid #ffffff26; font-size: 14px; transition: background .2s; }
 .opening-links a:hover { background: #ffffff14; }
 .opening-enter { position: absolute; z-index: 5; inset: auto 0 56px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 0 16px; }
-.opening-button { display: inline-flex; align-items: center; gap: 14px; padding: 18px 36px; border-radius: 999px; background: linear-gradient(90deg, #c9a24d, #e6cb84); color: #1d2b28; font-size: 17px; font-weight: 600; box-shadow: 0 10px 34px #0005; transition: transform .2s; }
+.opening-button { display: inline-flex; align-items: center; gap: 14px; padding: 18px 36px; border-radius: 999px; background: linear-gradient(90deg, #c9a24d, #e6cb84); color: #172231; font-size: 17px; font-weight: 600; box-shadow: 0 10px 34px #0005; transition: transform .2s; }
 .opening-button:hover { transform: translateY(-2px); }
 .opening-empty { padding: 14px 22px; border-radius: 999px; background: #18312dc7; font-size: 14px; }
 
@@ -409,7 +409,7 @@
 .narrator.is-speaking .narrator-wave i { opacity: 1; animation: advisor-wave .55s ease-in-out infinite alternate; height: 14px; }
 .narrator.is-speaking .narrator-wave i:nth-child(2n) { animation-delay: .15s; }
 .narrator.is-speaking .narrator-wave i:nth-child(3) { animation-delay: .3s; }
-.narrator-text { white-space: pre-line; min-height: 3.4em; margin-top: 6px; font-size: 14px; line-height: 1.7; color: #3d4640; }
+.narrator-text { white-space: pre-line; min-height: 3.4em; margin-top: 6px; font-size: 14px; line-height: 1.7; color: #2b3e58; }
 .narrator-rest { opacity: 0; }
 .narrator.is-speaking .narrator-typed::after { content: ''; display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: #d9a521; animation: narrator-caret .8s steps(1) infinite; }
 .narrator-actions { display: flex; gap: 14px; margin-top: 8px; }
@@ -449,7 +449,7 @@
 .stage-panel-right h2 { font-size: clamp(30px, 3vw, 44px); }
 .narrator-inline { margin: 10px 0 0; padding: 0; border: 0; background: none; }
 .narrator-inline .narrator-avatar, .narrator-inline .narrator-name { display: none; }
-.narrator-inline .narrator-text { min-height: 0; margin-top: 0; max-width: 620px; font-size: 16px; color: #3d4640; }
+.narrator-inline .narrator-text { min-height: 0; margin-top: 0; max-width: 620px; font-size: 16px; color: #2b3e58; }
 .facility-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 @container (min-width: 28rem) { .facility-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @container (min-width: 50rem) { .facility-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -482,7 +482,7 @@
 .info-visit-divider { flex-shrink: 0; width: 1px; margin: 10px 0; background-image: repeating-linear-gradient(180deg, #abbace 0 6px, transparent 6px 12px); }
 
 .info-facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.info-fact { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid #d4d9e0; background: #ffffff; font-size: 12.5px; color: #3d4640; transition: background .2s, border-color .2s; }
+.info-fact { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid #d4d9e0; background: #ffffff; font-size: 12.5px; color: #2b3e58; transition: background .2s, border-color .2s; }
 a.info-fact:hover { background: #dbe2ec; border-color: #abbace; }
 .info-fact svg { flex-shrink: 0; color: #c8921a; }
 .info-address { margin-top: 10px; font-size: 12.5px; color: #8a8f85; }
@@ -650,15 +650,15 @@ a.info-fact:hover { background: #dbe2ec; border-color: #abbace; }
 
 .rc-done { display: grid; gap: 10px; padding: 14px; border: 1px solid #bfd9c8; border-radius: var(--radius-card); background: linear-gradient(160deg, #f1f9f3, #fbfdf9); animation: rc-pop .5s var(--ease-cine) backwards; }
 .rc-done-head { display: flex; align-items: center; gap: 10px; }
-.rc-done-check { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #2f6b4a; animation: rc-check-pop .55s var(--ease-cine) backwards; }
+.rc-done-check { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #2f496b; animation: rc-check-pop .55s var(--ease-cine) backwards; }
 .rc-done-check svg { width: 20px; height: 20px; fill: none; stroke: white; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 24; stroke-dashoffset: 24; animation: rc-draw .5s ease .3s forwards; }
-.rc-done-title { font-size: 14px; font-weight: 600; color: #1f4d36; }
+.rc-done-title { font-size: 14px; font-weight: 600; color: #1f334d; }
 .rc-done-sub { margin-top: 1px; font-size: 11px; color: #5d7366; }
 .rc-done-rows { margin: 0; }
 .rc-done-rows > div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid #d3e4d9; font-size: 12px; }
 .rc-done-rows dt { color: #5d7366; }
 .rc-done-rows dd { margin: 0; font-weight: 500; text-align: right; color: var(--ink); }
-.rc-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; color: #1f4d36; }
+.rc-ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; color: #1f334d; }
 .rc-total { font-weight: 700 !important; }
 
 @keyframes rc-pop { from { opacity: 0; transform: translateY(14px) scale(.94); } to { opacity: 1; transform: none; } }
@@ -896,7 +896,8 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 .y-nav-menu li a { display: block; padding: 9px 12px; border-radius: 8px; }
 .y-nav-menu li a:hover { background: #ffffff14; }
 .y-header .stage-tools { display: flex; align-items: center; gap: 10px; margin-left: 24px; }
-.y-header .sound-toggle { display: none; }
+.y-header .sound-toggle { width: 36px; height: 36px; border-color: #ffffff40; background: transparent; backdrop-filter: none; }
+.y-header .sound-toggle:hover { background: #ffffff1a; }
 .y-header .stage-lang { padding: 3px; }
 .y-header .stage-lang a { padding: 5px 10px; font-size: 12px; }
 .y-theme { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #ffffff40; border-radius: 999px; }

@@ -1,8 +1,10 @@
 /**
- * Small UI sounds, synthesised with the Web Audio API (no audio files):
- * a garage bell when entering, a soft "ding" for incoming messages and a
- * tick when sending. Sound only ever follows a customer action, never plays on
- * its own, and can be muted with the header toggle (remembered per browser).
+ * Small UI sounds, synthesised with the Web Audio API (no audio files), all
+ * borrowed from the car: a relay tick for every tap and for sending, the
+ * tick-tock of a turn signal for an incoming reply, and the soft two-note
+ * door chime when a page opens. Sound only ever follows a customer action,
+ * never plays on its own, and can be muted with the header toggle (remembered
+ * per browser).
  */
 const STORAGE_KEY = 'workshop_sound';
 
@@ -48,24 +50,58 @@ function tone(frequency, start, duration, gain) {
     oscillator.stop(start + duration + 0.05);
 }
 
-/** A struck-bell voice: the note plus a quieter, shorter inharmonic partial. */
-function bell(frequency, start, gain, duration) {
+let noise = null;
+
+function noiseBuffer() {
+    if (!noise) {
+        noise = context.createBuffer(1, Math.floor(context.sampleRate * 0.06), context.sampleRate);
+        const data = noise.getChannelData(0);
+        for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    }
+
+    return noise;
+}
+
+/** A relay contact closing: a few milliseconds of band-passed noise over a short low knock. */
+function relay(start, frequency, gain, knock) {
+    const source = context.createBufferSource();
+    const filter = context.createBiquadFilter();
+    const amp = context.createGain();
+
+    source.buffer = noiseBuffer();
+    filter.type = 'bandpass';
+    filter.frequency.value = frequency;
+    filter.Q.value = 5;
+    amp.gain.setValueAtTime(gain * 3, start);
+    amp.gain.exponentialRampToValueAtTime(0.0001, start + 0.035);
+
+    source.connect(filter).connect(amp).connect(master);
+    source.start(start);
+    source.stop(start + 0.06);
+    tone(knock, start, 0.05, gain * 0.8);
+}
+
+/** One note of the door chime: a soft sine with a quiet octave above it. */
+function chime(frequency, start, gain, duration) {
     tone(frequency, start, duration, gain);
-    tone(frequency * 2.76, start, duration * 0.45, gain * 0.28);
+    tone(frequency * 2, start, duration * 0.5, gain * 0.18);
 }
 
 const sounds = {
     enter(now) {
-        bell(659.25, now, 0.14, 1.1);
-        bell(987.77, now + 0.14, 0.12, 1.0);
-        bell(1318.51, now + 0.28, 0.09, 0.9);
+        relay(now, 2200, 0.2, 140);
+        chime(880, now + 0.05, 0.1, 0.32);
+        chime(659.25, now + 0.3, 0.09, 0.5);
     },
     incoming(now) {
-        bell(880, now, 0.11, 0.55);
-        bell(1174.66, now + 0.09, 0.08, 0.5);
+        relay(now, 1900, 0.22, 170);
+        relay(now + 0.12, 1300, 0.2, 120);
     },
     sent(now) {
-        tone(523.25, now, 0.12, 0.05);
+        relay(now, 2000, 0.16, 150);
+    },
+    click(now) {
+        relay(now, 2400, 0.1, 180);
     },
 };
 
@@ -105,6 +141,20 @@ function initSoundToggle() {
     });
 }
 
+/** Every tap on a control gets the relay tick; the toggle and the chat's own sounds speak for themselves. */
+function initClickTick() {
+    document.addEventListener('click', (event) => {
+        const control = event.target.closest?.('button, a[href], summary, [role="tab"]');
+
+        if (!control || control.matches('[data-sound-toggle], [data-chat-submit], [disabled]')) return;
+
+        play('click');
+    });
+}
+
 window.workshopSound = { play, isEnabled };
 
-document.addEventListener('DOMContentLoaded', initSoundToggle);
+document.addEventListener('DOMContentLoaded', () => {
+    initSoundToggle();
+    initClickTick();
+});
