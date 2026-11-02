@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="stage-page antialiased" style="--advisor-image: url('{{ $backdrop['avatarImage'] }}'); --stage-focus: {{ $backdrop['focus'] }}; --stage-focus-mobile: {{ $backdrop['focusMobile'] }}; --advisor-zoom: {{ $backdrop['avatarZoom'] }}; --advisor-focus: {{ $backdrop['avatarFocus'] }}">
-    <main class="stage" data-garage data-scene="{{ $scene }}" data-page="{{ $scene === 'garage' ? 'home' : $scene }}" data-chat-dock="{{ $scene === 'info' ? 'center' : ($scene === 'staff' ? 'left' : 'right') }}">
+    <main class="stage" data-garage data-scene="{{ $scene }}" data-page="{{ $scene === 'garage' ? 'home' : $scene }}" data-chat-dock="{{ $scene === 'info' && ! request()->routeIs('workshop.company', 'workshop.access') ? 'center' : ($scene === 'staff' ? 'left' : 'right') }}">
         <div class="stage-loader" data-stage-loader role="status"><span class="workshop-monogram" aria-hidden="true">@if ($workshop->logoUrl())<img src="{{ $workshop->logoUrl() }}" alt="">@else{{ mb_substr($workshop->name, 0, 1) }}@endif</span><p>{{ $garage['loading'] }}</p></div>
         <img src="{{ $backdrop['image'] }}" alt="{{ $backdrop['character'] ? '' : $garage['assistant'] }}" class="stage-image" fetchpriority="high">
         <div class="stage-shade"></div>

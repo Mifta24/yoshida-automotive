@@ -1,4 +1,5 @@
 <h2 class="y-heading">{{ $division['items_heading'] }}</h2>
+<p class="y-photo-note">掲載画像は施工イメージです。</p>
 <ul class="y-tiles" style="--cols: 5">
     @foreach ($division['items'] as $i => $item)
         <li><x-site-tile :src="$sitePhoto($item[3] ?? $divisionKey.'-'.($i + 1))" :label="$item[0]" :note="$item[1]" :icon="$item[2]" /></li>

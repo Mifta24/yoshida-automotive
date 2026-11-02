@@ -142,8 +142,7 @@ class WorkshopPageController extends Controller
     public function show(Request $request, string $workshopSlug): View
     {
         [$workshop, $locale] = $this->resolveStage($request, $workshopSlug);
-        $data = $this->stageData($workshop, $locale, 'garage');
-        $data['backdrop']['image'] = $this->sitePhoto('hero') ?? $data['backdrop']['image'];
+        $data = $this->withSiteBackdrop($this->stageData($workshop, $locale, 'garage'));
 
         return view('workshop.show', [
             ...$data,
@@ -203,6 +202,7 @@ class WorkshopPageController extends Controller
     private function withSiteBackdrop(array $data): array
     {
         $data['backdrop']['image'] = $this->sitePhoto('hero') ?? $data['backdrop']['image'];
+        $data['backdrop']['character'] = null;
 
         return $data;
     }

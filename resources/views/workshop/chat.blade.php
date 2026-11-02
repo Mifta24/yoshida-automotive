@@ -112,11 +112,11 @@
                 <header class="chat-log-header">
                     <span class="chat-host-avatar" aria-hidden="true"></span>
                     <div class="min-w-0 flex-1">
-                        <p class="flex items-center gap-1.5 font-semibold text-stone-900">
+                        <p class="chat-title flex items-center gap-1.5 font-semibold">
                             {{ $labels['chat_heading'] }}
                             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                         </p>
-                        <p class="truncate text-xs text-stone-500">{{ $labels['chat_subtitle'] }}</p>
+                        <p class="chat-subtitle truncate text-xs">{{ $labels['chat_subtitle'] }}</p>
                         <p data-chat-status class="chat-status" aria-live="polite" hidden></p>
                     </div>
                     <button type="button" data-chat-new class="chat-log-close" aria-label="{{ $labels['chat_new'] }}" title="{{ $labels['chat_new'] }}">

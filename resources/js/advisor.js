@@ -316,8 +316,8 @@ function initAdvisor() {
         const inner = document.createElement('div');
         inner.className =
             role === 'customer'
-                ? 'max-w-[85%] rounded-2xl rounded-br-sm bg-stone-900 px-3 py-2 text-sm text-white'
-                : 'max-w-[85%] rounded-2xl rounded-bl-sm bg-stone-100 px-3 py-2 text-sm text-stone-900';
+                ? 'chat-msg chat-msg-customer'
+                : 'chat-msg chat-msg-assistant';
         inner.textContent = text;
 
         wrap.appendChild(inner);

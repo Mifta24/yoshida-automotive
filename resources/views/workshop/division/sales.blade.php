@@ -8,6 +8,7 @@
 <div class="y-duo y-duo-stock">
     <section class="y-box">
         <h2 class="y-heading">{{ $division['stock_heading'] }} <small>{{ $division['stock_sub'] }}</small></h2>
+        <p class="y-photo-note">掲載車両の写真はイメージです。実際の在庫車両とは異なります。</p>
         <ul class="y-stock">
             @foreach ($division['stock'] as $i => [$name, $note, $badge])
                 @php $photo = $sitePhoto('sales-stock-'.($i + 1)); @endphp

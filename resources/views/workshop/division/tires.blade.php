@@ -8,7 +8,8 @@
 <h2 class="y-heading y-heading-bar"><x-site-icon name="tire" />{{ $division['types_heading'] }} <small>{{ $division['types_sub'] }}</small></h2>
 <div class="y-types">
     @foreach ($division['types'] as [$tone, $icon, $name, $note])
-        <article class="y-type y-type-{{ $tone }}"><x-site-icon :name="$icon" /><strong>{{ $name }}</strong><small>{{ $br($note) }}</small></article>
+        @php $typePhoto = $sitePhoto('tires-'.$tone); @endphp
+        <article class="y-type y-type-{{ $tone }}" @if ($typePhoto) style="--y-photo: url('{{ $typePhoto }}')" @endif><x-site-icon :name="$icon" /><strong>{{ $name }}</strong><small>{{ $br($note) }}</small></article>
     @endforeach
     <aside class="y-brands">
         <p>{{ $division['brands_heading'] }}</p>

@@ -7,6 +7,7 @@
                 <p class="y-president-role">{{ $company['role'] }}</p>
                 <p class="y-president-name">{{ $company['name'] }}</p>
                 <p class="y-president-en">{{ $company['name_en'] }}</p>
+                @if ($photo)<small class="y-president-note">人物写真はイメージです</small>@endif
             </div>
             <div class="y-greeting">
                 <h2>{{ $company['heading_1'] }}<br><em>{{ $company['heading_accent'] }}</em>{{ $company['heading_2'] }}</h2>
