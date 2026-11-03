@@ -1348,3 +1348,55 @@ a.rc-fact { display: inline-block; color: var(--forest); text-decoration: underl
 :root[data-theme="dark"] .y-wizard-wrap .sp-hint { background: #16335f; color: #f6cf63; }
 .wizard-calendar + .wizard-hint { display: none; }
 .y-tabs { flex: none; }
+
+/*
+ * Phones and tablets. The desktop panels are a grid with fixed rows, which
+ * squeezes the content on a short screen and lets it run under the buttons.
+ * Here each panel is one column that scrolls as a whole.
+ */
+@media (max-width: 1100px) {
+    .stage.stage .y-panel { display: flex; flex-direction: column; gap: 14px; padding: 12px; }
+    .y-panel > * { flex: none; }
+    .y-panel-side, .y-panel-tires .y-panel-side { min-height: 0; }
+    .y-panel-side:not(:has(.y-xchange)) { padding-top: 76px; }
+    .y-side-logo { padding-right: 60px; }
+    .y-panel-main, .y-panel-tires .y-panel-main, .y-panel-reservation .y-panel-main { min-height: auto; padding: 0; overflow: visible; }
+    .y-panel-tires { padding: 0 12px 12px; }
+    .y-tires-bar { margin: 0 -12px; }
+    .y-cta { min-height: 60px; padding: 8px 14px 8px 18px; gap: 12px; }
+    .y-cta svg { width: 32px; height: 32px; }
+    .y-cta-book { position: sticky; bottom: 12px; z-index: 2; margin-bottom: 12px; }
+    .y-panel-tires .y-cta { margin-bottom: 0; }
+    .y-company::before { background: #ffffffeb; }
+    :root[data-theme="dark"] .y-company::before { background: #040d1beb; }
+    .y-company::before, .y-company-backdrop { position: fixed; inset: var(--header) 0 0; width: 100%; height: auto; }
+    .y-company-backdrop { opacity: .35; }
+}
+@media (max-width: 640px) {
+    .y-logo { flex: 0 1 auto; gap: 8px; }
+    .y-logo-mark { width: 34px; }
+    .y-logo-img { width: 34px; height: 34px; }
+    .y-logo strong { font-size: 12px; letter-spacing: 0; }
+    .y-logo small { font-size: 10.5px; letter-spacing: .04em; }
+    .y-header .stage-tools { gap: 6px; }
+    .y-theme, .y-header .sound-toggle { width: 34px; height: 34px; }
+    .y-header-cta { padding: 8px 10px; font-size: 12px; }
+    .y-header-cta svg { display: none; }
+    .y-bar-sep { display: none; }
+    .y-banner { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 14px; text-align: center; }
+    .y-banner a { white-space: normal; }
+    .y-box .y-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 6px; }
+    .y-box .y-flow li + li::before { display: none; }
+    .y-panel-tires .y-badges li { font-size: 11px; }
+    .y-xchange { padding: 0 20px; }
+    .y-xchange em { font-size: 26px; white-space: nowrap; }
+    .y-info div { grid-template-columns: 96px minmax(0, 1fr); gap: 8px; padding: 12px 14px; font-size: 14px; }
+}
+
+/* On a phone the conversation fills the screen under the header, with the composer docked inside it. */
+@media (max-width: 899px) {
+    .stage.stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .chat-log { top: calc(var(--header) + 12px); bottom: 12px; }
+    .stage.stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .chat-bar { left: 12px; right: 12px; bottom: 12px; width: auto; min-height: 56px; padding: 6px 6px 6px 18px; border-radius: 999px; transform: translateY(12px) scale(.98); }
+    .stage.stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .stage-chat.is-open .chat-bar { transform: none; }
+    .stage.stage.stage:is(:has(.y-home), :has(.y-panel), :has(.y-company)) .chat-bar button[type="submit"] { padding: 0 16px; }
+}
