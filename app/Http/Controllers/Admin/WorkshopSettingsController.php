@@ -39,6 +39,9 @@ class WorkshopSettingsController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:5000'],
+            'translations.id.description' => ['nullable', 'string', 'max:5000'],
+            'translations.en.description' => ['nullable', 'string', 'max:5000'],
+            'translations.ja.description' => ['nullable', 'string', 'max:5000'],
             'address' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:255'],
             'country' => ['nullable', 'string', 'max:255'],
@@ -62,8 +65,14 @@ class WorkshopSettingsController extends Controller
         $previousDomain = $workshop->custom_domain;
         $domain = filled($data['custom_domain'] ?? null) ? strtolower($data['custom_domain']) : null;
 
+        $translations = $workshop->translations ?? [];
+        foreach (['id', 'en', 'ja'] as $locale) {
+            $translations[$locale]['description'] = filled($data['translations'][$locale]['description'] ?? null) ? trim($data['translations'][$locale]['description']) : null;
+        }
+
         $changes = [
-            ...collect($data)->except(['logo', 'cover', 'ai_instructions', 'custom_domain'])->all(),
+            ...collect($data)->except(['logo', 'cover', 'ai_instructions', 'custom_domain', 'translations'])->all(),
+            'translations' => $translations,
             'custom_domain' => $domain,
             'opening_time' => $data['opening_time'],
             'closing_time' => $data['closing_time'],

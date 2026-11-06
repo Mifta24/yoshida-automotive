@@ -16,7 +16,11 @@
             <h2 class="font-medium text-stone-900">Profile</h2>
             <div class="mt-3 grid gap-3 sm:grid-cols-2">
                 <label class="block sm:col-span-2">Workshop name<input name="name" value="{{ old('name', $workshop->name) }}" required class="{{ $field }}"></label>
-                <label class="block sm:col-span-2">About the workshop<textarea name="description" rows="3" class="{{ $field }}">{{ old('description', $workshop->description) }}</textarea></label>
+                <label class="block sm:col-span-2">About the workshop (main text)<textarea name="description" rows="3" class="{{ $field }}">{{ old('description', $workshop->description) }}</textarea></label>
+                <p class="text-xs text-stone-400 sm:col-span-2">Visitors reading the site in another language see that language's version below. Leave it empty to show the main text.</p>
+                @foreach (['id' => 'Indonesian', 'en' => 'English', 'ja' => 'Japanese'] as $code => $name)
+                    <label class="block sm:col-span-2">About the workshop ({{ $name }})<textarea name="translations[{{ $code }}][description]" rows="3" class="{{ $field }}">{{ old("translations.{$code}.description", $workshop->translations[$code]['description'] ?? '') }}</textarea></label>
+                @endforeach
                 <label class="block sm:col-span-2">Address<input name="address" value="{{ old('address', $workshop->address) }}" class="{{ $field }}"></label>
                 <label class="block">City<input name="city" value="{{ old('city', $workshop->city) }}" class="{{ $field }}"></label>
                 <label class="block">Country<input name="country" value="{{ old('country', $workshop->country) }}" class="{{ $field }}"></label>

@@ -65,6 +65,25 @@ class WorkshopSettingsTest extends TestCase
         Storage::disk('public')->assertMissing($oldLogo);
     }
 
+    public function test_the_owner_saves_translated_descriptions_without_losing_other_translations(): void
+    {
+        $this->workshop->update(['description' => 'Bengkel kami', 'translations' => ['ja' => ['name' => '吉田自動車工業', 'description' => 'old']]]);
+
+        $this->actingAs($this->owner)->put(route('admin.settings.update'), $this->form([
+            'translations' => [
+                'id' => ['description' => ''],
+                'en' => ['description' => '  Our workshop  '],
+                'ja' => ['description' => '私たちの工場'],
+            ],
+        ]))->assertSessionHasNoErrors();
+
+        $workshop = $this->workshop->fresh();
+        $this->assertSame('Our workshop', $workshop->translatedDescription('en'));
+        $this->assertSame('私たちの工場', $workshop->translatedDescription('ja'));
+        $this->assertSame('Bengkel kami', $workshop->translatedDescription('id'));
+        $this->assertSame('吉田自動車工業', $workshop->translations['ja']['name']);
+    }
+
     public function test_only_owners_open_the_settings_and_the_logo_shows_on_the_workshop_pages(): void
     {
         $frontDesk = User::factory()->create();
